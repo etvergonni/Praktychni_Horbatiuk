@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text.Json;
 
 namespace Praktychna1;
+// Гілка feature/file-storage
+// SaveToFile / LoadFromFile у форматі JSON
 
 public class StudentGroup
 {
