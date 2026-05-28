@@ -4,9 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 
+
 namespace Praktychna1;
 // Гілка feature/file-storage
 // SaveToFile / LoadFromFile у форматі JSON
+
+namespace Praktychna1; // Управління групою студентів та консольне меню
+
 
 public class StudentGroup
 {
