@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 
-namespace Praktychna1;
+namespace Praktychna1; // Управління групою студентів та консольне меню
 
 public class StudentGroup
 {
