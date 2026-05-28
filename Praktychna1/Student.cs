@@ -2,7 +2,7 @@ using System;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace Praktychna1;
+namespace Praktychna1; //meow
 
 
 public class Student
