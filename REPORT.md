@@ -111,9 +111,8 @@
 
 ## 5. Посилання на репозиторій
 
-https://github.com/<твій-логін>/Pracktuchna1_Горбатюк
+https://github.com/etvergonni/Pracktuchna1_-
 
-*(заміни на актуальне посилання після публікації на GitHub)*
 
 ## 6. Висновок
 
