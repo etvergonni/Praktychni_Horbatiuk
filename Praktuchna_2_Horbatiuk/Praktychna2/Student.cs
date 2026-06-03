@@ -5,30 +5,27 @@ using System.Text.RegularExpressions;
 
 namespace Praktychna2;
 
-/// <summary>
-/// Модель студента, розширена для ПР №2:
-/// - масив оцінок за лабораторні (одновимірний масив byte[10])
-/// - прив'язка до порту (PortRow/PortCol)
-/// - реалізація ICloneable
-/// </summary>
+// 
+// Реалізовано в гілці feature/student-lab-grades
+// Додано одновимірний масив byte[] LabGrades[10]
+// 
 public class Student : ICloneable
 {
-    // ───────── Приватні поля ─────────
+
     private string _fullName = string.Empty;
     private string _recordBookNumber = string.Empty;
     private string? _personalEmail;
     private double _averageGrade;
 
-    // ───────── ПР №2: масив оцінок за лабораторні (10 елементів) ─────────
+
     public byte[] LabGrades { get; private set; } = new byte[10];
 
-    // ───────── ПР №2: координати прив'язки до порту в матриці ─────────
-    // -1, -1 = не прив'язано
+
     public int PortRow { get; set; } = -1;
     public int PortCol { get; set; } = -1;
     public bool IsAssignedToPort => PortRow >= 0 && PortCol >= 0;
 
-    // ───────── Властивості з ПР №1 ─────────
+
     public string FullName
     {
         get => _fullName;
@@ -83,7 +80,7 @@ public class Student : ICloneable
     public string? Notes { get; set; }
     public GradeJournal Journal { get; init; } = new GradeJournal();
 
-    // ───────── Методи ПР №1 ─────────
+
     public int CalculateAge()
     {
         var today = DateTime.Today;
@@ -108,9 +105,7 @@ public class Student : ICloneable
         return Math.Max(0, years);
     }
 
-    // ───────── ПР №2: робота з масивом лабораторних оцінок ─────────
 
-    /// <summary>Додати оцінку за лабораторну роботу (labNumber від 1 до 10).</summary>
     public void AddLabGrade(int labNumber, byte grade)
     {
         if (labNumber < 1 || labNumber > 10)
@@ -121,7 +116,7 @@ public class Student : ICloneable
         LabGrades[labNumber - 1] = grade;
     }
 
-    /// <summary>Середня оцінка за лабораторні роботи (тільки оцінки > 0).</summary>
+
     public double GetAverageLabGrade()
     {
         var marks = LabGrades.Where(g => g > 0).ToArray();
@@ -129,10 +124,10 @@ public class Student : ICloneable
         return Math.Round(marks.Average(g => (double)g), 2);
     }
 
-    /// <summary>Кількість виконаних лабораторних робіт.</summary>
+  
     public int CompletedLabsCount => LabGrades.Count(g => g > 0);
 
-    /// <summary>Сортувати оцінки за лабораторні за зростанням (повертає копію).</summary>
+    
     public byte[] GetSortedLabGrades()
     {
         var copy = (byte[])LabGrades.Clone();
@@ -140,7 +135,7 @@ public class Student : ICloneable
         return copy;
     }
 
-    /// <summary>Вивести детальну інформацію через StringBuilder.</summary>
+    
     public string GetDetailedInfo()
     {
         var sb = new StringBuilder();
@@ -154,7 +149,7 @@ public class Student : ICloneable
         sb.AppendLine($"Середній бал: {AverageGrade:F2}");
         sb.AppendLine($"Оцінки: {Journal.GetGradesSummary()}");
 
-        // Інформація про лабораторні (одновимірний масив)
+  
         sb.Append("Лабораторні (");
         sb.Append(CompletedLabsCount);
         sb.AppendLine("/10):");
@@ -168,7 +163,7 @@ public class Student : ICloneable
         if (CompletedLabsCount > 0)
             sb.AppendLine($"  Середня лабораторна: {GetAverageLabGrade():F2}");
 
-        // Інформація про порт
+
         if (IsAssignedToPort)
             sb.AppendLine($"Прив'язано до порту: ({PortRow}, {PortCol})");
         else
@@ -180,14 +175,12 @@ public class Student : ICloneable
         return sb.ToString();
     }
 
-    /// <summary>Вивести детальну інформацію (зручний друк у консоль).</summary>
+    
     public void ShowDetailedInfo()
     {
         Console.Write(GetDetailedInfo());
     }
 
-    // ───────── ICloneable ─────────
-    /// <summary>Створити повну (глибоку) копію студента.</summary>
     public object Clone()
     {
         var copy = new Student
@@ -202,10 +195,10 @@ public class Student : ICloneable
             PortRow = this.PortRow,
             PortCol = this.PortCol
         };
-        // Глибока копія масиву оцінок
+
         copy.LabGrades = (byte[])this.LabGrades.Clone();
 
-        // Скопіювати журнал оцінок
+   
         foreach (var kvp in this.Journal.SubjectGrades)
             copy.Journal.SetGrade(kvp.Key, kvp.Value);
 
