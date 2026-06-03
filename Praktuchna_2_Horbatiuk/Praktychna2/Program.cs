@@ -3,7 +3,8 @@ using System.Linq;
 using System.Text;
 
 namespace Praktychna2;
-
+// Реалізовано в гілці feature/menu-integration
+// Розширене консольне меню на 15 пунктів
 internal class Program
 {
     private static StudentGroup _group = new()
@@ -124,7 +125,7 @@ internal class Program
         Console.WriteLine($"Студента {s.FullName} додано.");
     }
 
-    // ─────────────── 2. Видалити ───────────────
+
     static void RemoveStudent()
     {
         Console.Write("Номер заліковки: ");
@@ -132,7 +133,7 @@ internal class Program
         Console.WriteLine(_group.RemoveStudent(id) ? "Видалено." : "Не знайдено.");
     }
 
-    // ─────────────── 3. Студенти з лабораторними ───────────────
+
     static void ShowStudentsWithLabs()
     {
         var all = _group.GetAllStudents();
@@ -168,7 +169,7 @@ internal class Program
         Console.Write(sb.ToString());
     }
 
-    // ─────────────── 4. Ініціалізувати матрицю ───────────────
+
     static void InitializeMatrix()
     {
         _matrix.Initialize();
@@ -178,7 +179,7 @@ internal class Program
         Console.WriteLine($"Створено {PortMatrix.Rows * PortMatrix.Cols} портів.");
     }
 
-    // ─────────────── 5. Відкрити / закрити порт ───────────────
+ 
     static void OpenOrClosePort()
     {
         if (!_matrixInitialized) { Console.WriteLine("Спочатку ініціалізуйте матрицю (пункт 4)."); return; }
@@ -203,7 +204,7 @@ internal class Program
         }
     }
 
-    // ─────────────── 6. Записати в порт ───────────────
+
     static void WriteToPort()
     {
         if (!_matrixInitialized) { Console.WriteLine("Спочатку ініціалізуйте матрицю."); return; }
@@ -228,7 +229,7 @@ internal class Program
         Console.WriteLine($"Записано {data.Length} байт у порт.");
     }
 
-    // ─────────────── 7. Прочитати з порту ───────────────
+
     static void ReadFromPort()
     {
         if (!_matrixInitialized) { Console.WriteLine("Спочатку ініціалізуйте матрицю."); return; }
@@ -254,14 +255,14 @@ internal class Program
         }
     }
 
-    // ─────────────── 8. Вивести стан матриці ───────────────
+
     static void ShowMatrixState()
     {
         if (!_matrixInitialized) { Console.WriteLine("Спочатку ініціалізуйте матрицю."); return; }
         Console.Write(_matrix.GetMatrixView());
     }
 
-    // ─────────────── 9. Прив'язати студента до порту ───────────────
+
     static void AssignStudentToPort()
     {
         if (!_matrixInitialized) { Console.WriteLine("Спочатку ініціалізуйте матрицю."); return; }
@@ -282,7 +283,7 @@ internal class Program
         Console.WriteLine($"Студента {s.FullName} прив'язано до порту ({row}, {col}).");
     }
 
-    // ─────────────── 10. Симулювати лабораторну ───────────────
+
     static void SimulateLab()
     {
         if (!_matrixInitialized) { Console.WriteLine("Спочатку ініціалізуйте матрицю."); return; }
@@ -307,7 +308,7 @@ internal class Program
         Console.WriteLine($"Середня лабораторна: {s.GetAverageLabGrade():F2}");
     }
 
-    // ─────────────── 11. Переглянути лог ───────────────
+
     static void ShowLog()
     {
         var log = _logger.GetFullLog();
@@ -328,7 +329,7 @@ internal class Program
         }
     }
 
-    // ─────────────── 12. Пошук ───────────────
+
     static void Search()
     {
         Console.WriteLine("1 - пошук студента, 2 - пошук портів за типом пристрою");
@@ -337,10 +338,10 @@ internal class Program
         {
             Console.Write("Частина ПІБ або номер заліковки: ");
             var q = Console.ReadLine() ?? string.Empty;
-            // спочатку точне співпадіння за заліковкою
+  
             var exact = _group.FindStudent(q);
             if (exact != null) { exact.ShowDetailedInfo(); return; }
-            // інакше пошук за ПІБ
+
             var found = _group.FindStudent(q, byName: true);
             Console.WriteLine($"Знайдено: {found.Count}");
             foreach (var s in found) s.ShowDetailedInfo();
@@ -360,7 +361,7 @@ internal class Program
         }
     }
 
-    // ─────────────── 13. Save / Load ───────────────
+
     static void SaveOrLoad()
     {
         Console.WriteLine("1 - зберегти, 2 - завантажити");
@@ -377,7 +378,7 @@ internal class Program
         }
     }
 
-    // ─────────────── 14. Статистика ───────────────
+
     static void ShowStatistics()
     {
         var sb = new StringBuilder();
@@ -387,7 +388,7 @@ internal class Program
         sb.AppendLine($"  Відмінників: {_group.GetExcellentStudents().Count} ({_group.ExcellentPercent}%)");
         sb.AppendLine($"  З низьким балом: {_group.GetFailingStudents().Count}");
 
-        // Середня по лабораторних
+    
         var allStudents = _group.GetAllStudents();
         var avgLab = allStudents.Where(s => s.CompletedLabsCount > 0)
             .Select(s => s.GetAverageLabGrade()).DefaultIfEmpty(0).Average();
@@ -405,7 +406,7 @@ internal class Program
         Console.Write(sb.ToString());
     }
 
-    // ─────────────── 15. Згенерувати великий звіт ───────────────
+
     static void GenerateBigReport()
     {
         Console.Write("Кількість записів (за замовч. 100): ");
@@ -416,7 +417,7 @@ internal class Program
         Console.WriteLine($"Згенеровано звіт ({report.Length} символів, {count} записів).");
         Console.WriteLine();
 
-        // Покажемо лише перші 20 рядків, щоб не засипати консоль
+
         var lines = report.Split('\n');
         for (int i = 0; i < Math.Min(20, lines.Length); i++)
             Console.WriteLine(lines[i]);
@@ -431,7 +432,7 @@ internal class Program
         }
     }
 
-    // ─────────────── Демо-дані ───────────────
+
     static void SeedDemoData()
     {
         var s1 = new Student
