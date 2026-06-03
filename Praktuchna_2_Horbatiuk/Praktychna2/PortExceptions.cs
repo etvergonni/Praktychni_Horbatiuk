@@ -1,8 +1,10 @@
 using System;
 
 namespace Praktychna2;
+// Реалізовано в гілці feature/refactoring
+// Власні винятки PortException та PortClosedException
 
-/// <summary>Базовий виняток для будь-яких помилок роботи з портом.</summary>
+
 public class PortException : Exception
 {
     public int PortNumber { get; }
@@ -13,7 +15,7 @@ public class PortException : Exception
     }
 }
 
-/// <summary>Виникає при спробі прочитати/записати дані в закритий порт.</summary>
+
 public class PortClosedException : PortException
 {
     public PortClosedException(int portNumber)
@@ -22,7 +24,7 @@ public class PortClosedException : PortException
     }
 }
 
-/// <summary>Виникає при виході координат за межі матриці.</summary>
+
 public class PortMatrixIndexException : PortException
 {
     public PortMatrixIndexException(int row, int col)
