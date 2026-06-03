@@ -7,9 +7,9 @@ using System.Text.Json;
 
 namespace Praktychna2;
 
-/// <summary>
-/// Управління групою студентів з інтеграцією системи портів.
-/// </summary>
+// Реалізовано в гілці feature/persistence
+// Методи SaveToFile та LoadFromFile з JSON
+
 public class StudentGroup
 {
     public string GroupName { get; set; } = string.Empty;
@@ -23,7 +23,7 @@ public class StudentGroup
     public double AverageGroupGrade =>
         _students.Count == 0 ? 0 : Math.Round(_students.Average(s => s.AverageGrade), 2);
 
-    /// <summary>Додати студента у групу.</summary>
+  
     public void AddStudent(Student s)
     {
         if (s == null) throw new ArgumentNullException(nameof(s));
@@ -35,7 +35,7 @@ public class StudentGroup
     public bool RemoveStudent(string recordBookNumber)
         => _students.RemoveAll(s => s.RecordBookNumber == recordBookNumber) > 0;
 
-    // Перевантажені методи пошуку
+
     public Student? FindStudent(string recordBookNumber)
         => _students.FirstOrDefault(s => s.RecordBookNumber == recordBookNumber);
 
@@ -56,16 +56,14 @@ public class StudentGroup
     public double ExcellentPercent =>
         GroupSize == 0 ? 0 : Math.Round(GetExcellentStudents().Count * 100.0 / GroupSize, 1);
 
-    // ───────── ПР №2: інтеграція з портами ─────────
 
-    /// <summary>Прив'язати студента до порту в матриці.</summary>
     public void AssignStudentToPort(Student s, int row, int col)
     {
         if (s == null) throw new ArgumentNullException(nameof(s));
         if (row < 0 || row >= PortMatrix.Rows || col < 0 || col >= PortMatrix.Cols)
             throw new PortMatrixIndexException(row, col);
 
-        // Перевірка, що цей порт ще не зайнятий іншим студентом
+
         if (_students.Any(other => other != s && other.PortRow == row && other.PortCol == col))
             throw new InvalidOperationException(
                 $"Порт ({row}, {col}) вже зайнято іншим студентом.");
@@ -74,14 +72,14 @@ public class StudentGroup
         s.PortCol = col;
     }
 
-    /// <summary>Відв'язати студента від порту.</summary>
+
     public void UnassignStudentFromPort(Student s)
     {
         s.PortRow = -1;
         s.PortCol = -1;
     }
 
-    /// <summary>Отримати студентів, чий порт відкритий / закритий.</summary>
+
     public List<Student> GetStudentsByPortStatus(bool isOpen, PortMatrix matrix)
     {
         return _students
@@ -94,21 +92,21 @@ public class StudentGroup
             .ToList();
     }
 
-    /// <summary>Симулювати лабораторну роботу: оцінка + запис у порт.</summary>
+ 
     public void SimulateLab(Student s, int labNumber, byte grade, PortMatrix matrix, PortLogger logger)
     {
         if (!s.IsAssignedToPort)
             throw new InvalidOperationException("Студент не прив'язаний до порту.");
 
-        // 1. Записати оцінку в масив LabGrades
+
         s.AddLabGrade(labNumber, grade);
 
-        // 2. Відкрити порт, якщо ще не відкрито
+
         var port = matrix.GetPort(s.PortRow, s.PortCol);
         bool wasClosed = !port.IsOpen;
         if (wasClosed) port.Open();
 
-        // 3. Записати дані в порт (номер лабораторної + оцінка + контекст)
+
         var dataToWrite = new byte[]
         {
             (byte)labNumber,
@@ -119,12 +117,12 @@ public class StudentGroup
         };
         port.Write(dataToWrite);
 
-        // 4. Залогувати операцію
+
         logger.LogOperation("LAB_DONE", port.PortNumber,
             $"студент={s.FullName}, лаб#{labNumber}, оцінка={grade}");
     }
 
-    // ───────── Збереження/завантаження JSON ─────────
+
     public void SaveToFile(string filename)
     {
         var data = new
@@ -171,7 +169,7 @@ public class StudentGroup
                 PortCol = item.TryGetProperty("PortCol", out var pc) ? pc.GetInt32() : -1
             };
 
-            // Відновити масив LabGrades
+
             if (item.TryGetProperty("LabGrades", out var labArr) &&
                 labArr.ValueKind == JsonValueKind.Array)
             {
@@ -182,7 +180,7 @@ public class StudentGroup
                 }
             }
 
-            // Відновити журнал
+
             if (item.TryGetProperty("Journal", out var journal) &&
                 journal.TryGetProperty("SubjectGrades", out var grades))
             {
