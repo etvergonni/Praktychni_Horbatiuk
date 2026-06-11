@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+# JetBrains Rider
+.idea/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
