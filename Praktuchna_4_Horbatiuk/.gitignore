@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+# JetBrains
+.idea/
+
+# Build
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Файли, згенеровані під час роботи
+*.log
+group.json
+students.csv
+logs.txt
+
+# OS
+.DS_Store
+Thumbs.db
