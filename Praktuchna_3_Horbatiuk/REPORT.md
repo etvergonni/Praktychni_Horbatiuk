@@ -82,4 +82,4 @@
 
 **Скриншот команди git log --oneline --graph --all:**
 
-(ВСТАВИТИ СЮДИ СКРИНШОТ ГРАФА)
+<img width="1280" height="609" alt="image" src="https://github.com/user-attachments/assets/8790c631-f4ca-4aee-b08b-08a9b0a88326" />
