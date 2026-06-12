@@ -81,7 +81,7 @@ if (s > best) best = s;
 
 - **Репозиторій:** https://github.com/etvergonni/Praktychni_Horbatiuk
 - **Кількість гілок (ПР №4):** 9 (develop, feature/operator-overloading-core, feature/vector-class, feature/gradepoint-class, feature/student-operators, feature/group-operators, feature/menu-integration, feature/variant-2, refactor/operators-cleanup)
-- **Кількість комітів (ПР №4):** (ЗАПОВНИТИ після git)
+- **Кількість комітів (ПР №4):** 18
 - **Тег:** v4.0
 
 **Скриншот команди git log --oneline --graph --all:**
