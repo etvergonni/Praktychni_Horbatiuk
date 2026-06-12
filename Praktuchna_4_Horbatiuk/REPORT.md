@@ -83,7 +83,6 @@ if (s > best) best = s;
 - **Кількість гілок (ПР №4):** 9 (develop, feature/operator-overloading-core, feature/vector-class, feature/gradepoint-class, feature/student-operators, feature/group-operators, feature/menu-integration, feature/variant-2, refactor/operators-cleanup)
 - **Кількість комітів (ПР №4):** 18
 - **Тег:** v4.0
-
 **Скриншот команди git log --oneline --graph --all:**
+<img width="917" height="458" alt="image" src="https://github.com/user-attachments/assets/b990a83f-6268-4987-ab95-20672d9cd6c7" />
 
-(ВСТАВИТИ СЮДИ СКРИНШОТ ГРАФА)
