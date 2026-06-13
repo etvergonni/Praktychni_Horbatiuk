@@ -101,7 +101,7 @@ GetMembersByType<T>() - узагальнений (generic) метод, що по
 
 - **Репозиторій:** https://github.com/etvergonni/Praktychni_Horbatiuk
 - **Кількість гілок (ПР №5):** 9 (develop, feature/inheritance-base, feature/abstract-universitymember, feature/student-hierarchy, feature/group-refactoring, feature/polymorphism-integration, feature/menu-inheritance, feature/variant-2, refactor/hierarchy-cleanup)
-- **Кількість комітів (ПР №5):** (ЗАПОВНИТИ після git)
+- **Кількість комітів (ПР №5):** 20
 - **Стратегія злиття:** git merge --no-ff для всіх гілок
 - **Тег:** v5.0
 
