@@ -106,5 +106,5 @@ GetMembersByType<T>() - узагальнений (generic) метод, що по
 - **Тег:** v5.0
 
 ### Граф гілок
+<img width="1280" height="614" alt="image" src="https://github.com/user-attachments/assets/1d8adc63-02df-4255-b687-ff9079c1d896" />
 
-(ВСТАВИТИ СЮДИ СКРИНШОТ ГРАФА git log --oneline --graph --all)
